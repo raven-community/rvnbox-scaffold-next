@@ -1,0 +1,34 @@
+{
+  "name": "rvnbox-scaffold-nextjs",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Basic nextJS app w/ RVNBOX bindings",
+  "author": "MSFTserver",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next",
+    "test": "nyc --reporter=text mocha --require babel-core/register --timeout 5000",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage:report": "nyc --reporter=html mocha --require babel-core/register --timeout 5000"
+  },
+  "dependencies": {
+    "rvnbox-sdk": "github:raven-community/rvnbox-javascript-sdk#master",
+    "mocha": "^5.2.0",
+    "next": "^5.1.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.2",
+    "eslint": "^5.5.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "node-mocks-http": "^1.7.0",
+    "supertest": "^2.0.0",
+    "prettier": "^1.14.2"
+  }
+}
