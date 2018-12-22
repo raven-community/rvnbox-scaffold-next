@@ -43,17 +43,17 @@ class Index extends React.Component {
     let masterHDNode = RVNBOX.HDNode.fromSeed(rootSeed, "ravencoin");
 
     // HDNode of BIP44 account
-    let account = RVNBOX.HDNode.derivePath(masterHDNode, "m/44'/145'/0'");
+    let account = RVNBOX.HDNode.derivePath(masterHDNode, "m/0'/175'/0'");
 
     // derive the first external change address HDNode which is going to spend utxo
     let change = RVNBOX.HDNode.derivePath(account, "0/0");
 
-    // get the rvn2 address
-    let rvn2Address = RVNBOX.HDNode.toRvn2Address(change);
+    // get the Legacy address
+    let LegacyAddress = RVNBOX.HDNode.toLegacyAddress(change);
 
     let hex;
 
-    RVNBOX.Address.utxo(rvn2Address).then(
+    RVNBOX.Address.utxo(LegacyAddress).then(
       result => {
         if (!result[0]) {
           return;
@@ -83,7 +83,7 @@ class Index extends React.Component {
         let sendAmount = originalAmount - byteCount;
 
         // add output w/ address and amount to send
-        transactionBuilder.addOutput(rvn2Address, sendAmount);
+        transactionBuilder.addOutput(LegacyAddress, sendAmount);
 
         // keypair
         let keyPair = RVNBOX.HDNode.toKeyPair(change);
@@ -136,12 +136,12 @@ class Index extends React.Component {
     for (let i = 0; i < 10; i++) {
       if (this.state.masterHDNode) {
         let account = this.state.masterHDNode.derivePath(
-          `m/44'/145'/0'/0/${i}`
+          `m/0'/175'/0'/0/${i}`
         );
         addresses.push(
           <li key={i}>
-            m/44&rsquo;/145&rsquo;/0&rsquo;/0/
-            {i}: {RVNBOX.HDNode.toRvn2Address(account)}
+            m/0&rsquo;/175&rsquo;/0&rsquo;/0/
+            {i}: {RVNBOX.HDNode.toLegacyAddress(account)}
           </li>
         );
       }
@@ -159,7 +159,7 @@ class Index extends React.Component {
           <p>{this.state.mnemonic}</p>
           <h3>BIP44 Account</h3>
           <p>
-            <code>"m/44'/145'/0'"</code>
+            <code>"m/0'/175'/0'"</code>
           </p>
           <h3>BIP44 external change addresses</h3>
           <ul>{addresses}</ul>
