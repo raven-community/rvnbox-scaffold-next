@@ -40,7 +40,7 @@ class Index extends React.Component {
     let rootSeed = RVNBOX.Mnemonic.toSeed(mnemonic);
 
     // master HDNode
-    let masterHDNode = RVNBOX.HDNode.fromSeed(rootSeed, "ravencoin");
+    let masterHDNode = RVNBOX.HDNode.fromSeed(rootSeed, "testnet");
 
     // HDNode of BIP44 account
     let account = RVNBOX.HDNode.derivePath(masterHDNode, "m/44'/175'/0'");
@@ -60,7 +60,7 @@ class Index extends React.Component {
         }
 
         // instance of transaction builder
-        let transactionBuilder = new RVNBOX.TransactionBuilder("ravencoin");
+        let transactionBuilder = new RVNBOX.TransactionBuilder("testnet");
         // original amount of satoshis in vin
         let originalAmount = result[0].satoshis;
 
