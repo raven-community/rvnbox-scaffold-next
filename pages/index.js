@@ -4,6 +4,8 @@ import Nav from "../components/nav";
 let RVNBOXSDK = require("rvnbox-sdk/lib/rvnbox-sdk").default;
 let RVNBOX = new RVNBOXSDK();
 
+let network = "testnet";
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -40,7 +42,7 @@ class Index extends React.Component {
     let rootSeed = RVNBOX.Mnemonic.toSeed(mnemonic);
 
     // master HDNode
-    let masterHDNode = RVNBOX.HDNode.fromSeed(rootSeed, "testnet");
+    let masterHDNode = RVNBOX.HDNode.fromSeed(rootSeed, network);
 
     // HDNode of BIP44 account
     let account = RVNBOX.HDNode.derivePath(masterHDNode, "m/44'/175'/0'");
@@ -60,7 +62,7 @@ class Index extends React.Component {
         }
 
         // instance of transaction builder
-        let transactionBuilder = new RVNBOX.TransactionBuilder("testnet");
+        let transactionBuilder = new RVNBOX.TransactionBuilder(network);
         // original amount of satoshis in vin
         let originalAmount = result[0].satoshis;
 
